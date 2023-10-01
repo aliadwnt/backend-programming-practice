@@ -29,9 +29,30 @@ class ProductController extends BaseController{
 
         ];
 
-        $this->product->insertProductORM($data);
+        $this->product->insert($data);
+    }
+    public function getProduct($id){
+        $product = $this->product->where("id", $id)->first();
+        $data = [
+            'product' => $product
+        ];
+        return view('edit-product', $data);
     }
 
+    public function updateProduct($id){
+        $nama_product = $this->request->getVar('nama_product');
+        $description = $this->request->getVar('description');
+        $data = [
+            'nama_product' => $nama_product,
+            'description' =>  $description
+        ];
+        $this->product->update($id, $data);
+        return redirect()->to(base_url("readproduct"));
+    }
+    public function deleteProduct($id){
+        $this->product->delete($id);
+        return redirect()->to(base_url("readproduct"));
+    }
 }
 
 ?>
