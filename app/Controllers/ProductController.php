@@ -49,7 +49,7 @@ use ResponseTrait;
             );
     }
 
-    return $this->respond([
+    return $this->response->setJSON([
         'code' => 200,
         'status' => "OK",
         'data' => $product
